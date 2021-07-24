@@ -8,10 +8,13 @@
 <body>
     <div id="map" style="width: 1280; height: 720;"></div>
     <script>
+        var cali = [-119.417931, 36.778259]
         var map = tt.map({
             key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
             container: "map",
-            style: "tomtom://vector/1/basic-main"
+            style: "tomtom://vector/1/basic-main",
+            center: cali,
+            zoom: 14,
         });
     </script>
 </body>
