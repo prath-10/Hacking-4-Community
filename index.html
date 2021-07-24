@@ -3,19 +3,44 @@
 <head>
     <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.69.1/maps/maps.css'>
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.69.1/maps/maps-web.min.js"></script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/5.x/5.69.1/services/services-web.min.js"></script>
 </head>
 
 <body>
+
+    <input type="text" id="queue" value="">
+    <button onclick="search()">SEARCH</button>
     <div id="map" style="width: 1280; height: 720;"></div>
     <script>
-        var cali = [-119.417931, 36.778259]
+        var gent = [3.71, 51.05]
         var map = tt.map({
             key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
+            center: gent,
             container: "map",
-            style: "tomtom://vector/1/basic-main",
-            center: cali,
             zoom: 14,
+            style: 'tomtom://vector/1/basic-main'
         });
+
+        var move = function(lnglat) {
+            map.flyTo({
+                center:lnglat,
+                zoom: 14
+            })
+        }
+
+        var handleResults = function(result) {
+            console.log(result);
+            if (result.results) {
+                move(result.results[0].position)
+            }
+        }
+
+        var search = function() {
+            tt.services.fuzzySearch({
+                key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
+                query: document.getElementById("queue").value,
+            }).go().then(handleResults)
+        }
     </script>
 </body>
 
