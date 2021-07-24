@@ -12,13 +12,13 @@
     <button onclick="search()">SEARCH</button>
     <div id="map" style="width: 1280; height: 720;"></div>
     <script>
-        var gent = [3.71, 51.05]
+        var gent = [-118.24, 34.05]
         var map = tt.map({
             key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
             center: gent,
             container: "map",
             zoom: 14,
-            style: 'tomtom://vector/1/basic-main'
+            style: 'tomtom://vector/1/hybrid-main'
         });
 
         var move = function(lnglat) {
@@ -32,6 +32,10 @@
             console.log(result);
             if (result.results) {
                 move(result.results[0].position)
+
+                //var marker = new tt.Marker()
+                    //.setLngLat(result,results[0].position)
+                    //.addTo(map);
             }
         }
 
@@ -39,6 +43,8 @@
             tt.services.fuzzySearch({
                 key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
                 query: document.getElementById("queue").value,
+                //boundingBox: map.getBounds()
+
             }).go().then(handleResults)
         }
     </script>
