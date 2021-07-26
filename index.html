@@ -11,6 +11,9 @@
     <input type="text" id="queue" value="">
     <button onclick="search()">SEARCH</button>
     <button onclick="clearMark()">Clear</button>
+    <button onclick="route()">Create Route</button>
+    <div id='distance'/>
+
     <div id="map" style="width: 1280; height: 720;"></div>
     <script>
         var la = [-118.24, 34.05]
@@ -51,7 +54,7 @@
                 move(result.results[0].position)
 
                 var marker = new tt.Marker()
-                    .setLngLat(result,results[0].position)
+                    .setLngLat(result.results[0].position)
                     .addTo(map);
             }
         }
@@ -63,6 +66,42 @@
                 boundingBox: map.getBounds()
 
             }).go().then(handleResults)
+        }
+
+        var displayRoute = function(geoJSON) {
+            layer = map.addLayer({
+                'id' : 'route',
+                'type' : 'line',
+                'source' : {
+                    "type": "geojson",
+                    "data": geoJSON
+                },
+                "paint" : {
+                    "line-color" : "green",
+                    "line-width" : 6
+                } 
+            })
+
+        }
+
+        var route = function() {
+            var options = {
+                key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
+                locations: [],
+                travelMode: 'pedestrian' 
+            }
+            for(marker of markers) {
+                options.locations.push(marker.getLngLat())
+            }
+            tt.services.calculateRoute(options).go().then(
+                function(routeData) {
+                    document.getElementById('distance').innerHTML = "Total Distance"+routeData.routes[0].summary.lengthInMeters+"mts"
+
+                    console.log(routeData)
+                    var geop = routeData.toGeoJson();
+                    displayRoute(geop)
+                }
+            )
         }
     </script>
 </body>
