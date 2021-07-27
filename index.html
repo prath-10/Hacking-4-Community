@@ -12,11 +12,31 @@
     <button onclick="search()">SEARCH</button>
     <button onclick="clearMark()">Clear</button>
     <button onclick="route()">Create Route</button>
-    <div id='distance'/>
+    <div id='distance'></div>
 
     <div id="map" style="width: 1280; height: 720;"></div>
     <script>
         var la = [-118.24, 34.05]
+        
+        var trafficFlowConfig = {
+            key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
+            theme: {
+                style: "relative-delay",
+                source: "vector"
+            },
+            refresh: 30000
+        }
+
+        var trafficIncidentsConfig = {
+            key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
+            incidentTiles: {
+                style: "tomtom://vectors/1/s2"
+            },
+            incidentDeatils: {
+                style: "s2"
+            }
+        }
+
         var map = tt.map({
             key: "B9K6O9ENhZT2yTvZpBVmDU8Q6JBzSlle",
             center: la,
@@ -34,11 +54,16 @@
             markers.push(marker)
         })
 
+        map.on('load', function(){
+            map.addTier(new tt.TrafficFlowTilesTier(trafficFlowConfig));
+        });
+
         var clearMark = function() {
             for(marker of markers) {
                 marker.remove();
             }
             markers = [];
+
         }
 
         var move = function(lnglat) {
