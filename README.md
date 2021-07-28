@@ -1,6 +1,4 @@
 # Hacking-4-Community
-
-# Hacking-4-Community
 ​
 ## Inspiration
 With the increasing severity and frequency of natural disasters all over the world, we realized how unprepared most of us are when faced with a drastic emergency.
