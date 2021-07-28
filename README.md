@@ -30,5 +30,5 @@ Once we were able to have our kickoff session the day after opening ceremonies, 
 ​
 ## What's Next
 Rachel: I'd want to spend more time on evaluating what other effective features could be implemented easily, in addition to spending more time on the UI.
-Danielle: If we had more time I'd like to do thorough user testing to test our concept and see if there are any improvements that could be made.
+Danielle: If we had more time I'd like to do thorough user testing to test our concept and see if there are any improvements that could be made. The map can be improved by implementing GPS traction and geofencing, allowing the program to detect where the user is and provide live events in their area.
 
